@@ -6,7 +6,7 @@ final random = Random();
 
 String generatePosition() {
   final chessLogic = Chess();
-  final movesMovesToPlay = random.nextInt(200) + 1;
+  final movesMovesToPlay = random.nextInt(201);
   final halfMovesToPlay = movesMovesToPlay * 2;
 
   for (int i = 0; i < halfMovesToPlay; i++) {
