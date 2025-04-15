@@ -4,9 +4,13 @@ import 'package:simple_chess_board/simple_chess_board.dart';
 
 class QuestionPage extends HookWidget {
   final String startPositionFen;
+  final List<String> movesToImagine;
 
-  const QuestionPage({Key? key, required this.startPositionFen})
-    : super(key: key);
+  const QuestionPage({
+    super.key,
+    required this.startPositionFen,
+    required this.movesToImagine,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +21,7 @@ class QuestionPage extends HookWidget {
       body: Center(
         child: Column(
           children: [
-            Container(
+            SizedBox(
               width: boardWidth.toDouble(),
               child: SimpleChessBoard(
                 fen: startPositionFen,
@@ -25,7 +29,8 @@ class QuestionPage extends HookWidget {
                 blackPlayerType: PlayerType.computer,
                 onMove: ({required ShortMove move}) {},
                 onPromote: () async => null,
-                onPromotionCommited: ({required moveDone, required pieceType}) {},
+                onPromotionCommited:
+                    ({required moveDone, required pieceType}) {},
                 onTap: ({required cellCoordinate}) {},
                 cellHighlights: {},
                 chessBoardColors: ChessBoardColors(),
