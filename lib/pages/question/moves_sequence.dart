@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import './fan_converter.dart';
 
+const fontSize = 30.0;
+
 class MovesSequence extends StatelessWidget {
   final bool firstMoveIsWhiteTurn;
   final int firstMoveNumber;
@@ -44,7 +46,10 @@ class MovesSequence extends StatelessWidget {
                 (firstMoveIsWhiteTurn && i % 2 == 0) ||
                 (!firstMoveIsWhiteTurn && i % 2 != 0),
           ),
-          style: const TextStyle(fontWeight: FontWeight.bold),
+          style: const TextStyle(
+            fontFamily: "FreeSerif",
+            fontSize: fontSize,
+          ),
         ),
       );
     }
@@ -55,8 +60,14 @@ class MovesSequence extends StatelessWidget {
     required int moveNumber,
     required bool isWhiteTurn,
   }) {
-    final caption = "$moveNumber.${isWhiteTurn ? "" : "..."}";
-    return Text(caption, style: const TextStyle(fontWeight: FontWeight.bold));
+    final caption = "$moveNumber.${isWhiteTurn ? "" : ".."}";
+    return Text(
+      caption,
+      style: const TextStyle(
+        fontFamily: "FreeSerif",
+        fontSize: fontSize,
+      ),
+    );
   }
 
   @override
