@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import './fan_converter.dart';
+import 'fan_converter.dart';
 
 const fontSize = 30.0;
 

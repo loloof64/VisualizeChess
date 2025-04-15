@@ -1,17 +1,19 @@
 import 'package:chess/chess.dart';
 import 'package:flutter/material.dart';
-import 'question/question_page.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:visualize_chess/providers/game.dart';
+import 'question_page.dart';
 import '../logic/position_generation.dart';
 
 const maxAttempts = 10;
+const movesToPlayCount = 2;
 
-class HomePage extends StatelessWidget {
+class HomePage extends ConsumerWidget {
   const HomePage({super.key});
 
-  void _goToQuestionPage(BuildContext context) {
+  void _goToQuestionPage(BuildContext context, WidgetRef ref) {
     String startPositionFen = Chess.DEFAULT_POSITION;
     List<String> movesToImagine = [];
-    final movesToPlayCount = 2;
 
     for (int i = 0; i < maxAttempts; i++) {
       try {
@@ -39,13 +41,20 @@ class HomePage extends StatelessWidget {
       return;
     }
 
+    final firstMoveIsWhiteTurn = startPositionFen.split(" ")[1] == "w";
+    final firstMoveNumber = int.parse(startPositionFen.split(" ")[5]);
+
+    final gameNotifier = ref.read(gameInstanceProvider.notifier);
+    gameNotifier.setStartPositionFen(startPositionFen);
+    gameNotifier.setMovesToPlayCount(movesToPlayCount);
+    gameNotifier.setMovesToImagine(movesToImagine);
+    gameNotifier.setFirstMoveIsWhiteTurn(firstMoveIsWhiteTurn);
+    gameNotifier.setFirstMoveNumber(firstMoveNumber);
+
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) {
-          return QuestionPage(
-            startPositionFen: startPositionFen,
-            movesToImagine: movesToImagine,
-          );
+          return QuestionPage();
         },
       ),
     );
@@ -75,12 +84,12 @@ class HomePage extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(title: const Text('Home Page')),
       body: Center(
         child: ElevatedButton(
-          onPressed: () => _goToQuestionPage(context),
+          onPressed: () => _goToQuestionPage(context, ref),
           child: Text("New game"),
         ),
       ),

@@ -1,24 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:simple_chess_board/simple_chess_board.dart';
-import 'package:visualize_chess/pages/question/moves_sequence.dart';
+import 'package:visualize_chess/pages/widgets/moves_sequence.dart';
+import 'package:visualize_chess/providers/game.dart';
 
-class QuestionPage extends HookWidget {
-  final String startPositionFen;
-  final List<String> movesToImagine;
-
-  const QuestionPage({
-    super.key,
-    required this.startPositionFen,
-    required this.movesToImagine,
-  });
+class QuestionPage extends HookConsumerWidget {
+  const QuestionPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final maxWidth = MediaQuery.of(context).size.width;
     final boardWidth = maxWidth < 500 ? maxWidth : 500;
-    final firstMoveNumber = int.parse(startPositionFen.split(" ")[5]);
-    final firstMoveIsWhiteTurn = startPositionFen.split(" ")[1] == "w";
+    final game = ref.watch(gameInstanceProvider);
+    final firstMoveNumber = game.firstMoveNumber;
+    final firstMoveIsWhiteTurn = game.firstMoveIsWhiteTurn;
 
     return Scaffold(
       appBar: AppBar(title: const Text('Question Page')),
@@ -28,7 +23,7 @@ class QuestionPage extends HookWidget {
             SizedBox(
               width: boardWidth.toDouble(),
               child: SimpleChessBoard(
-                fen: startPositionFen,
+                fen: game.startPositionFen,
                 whitePlayerType: PlayerType.computer,
                 blackPlayerType: PlayerType.computer,
                 onMove: ({required ShortMove move}) {},
@@ -41,7 +36,7 @@ class QuestionPage extends HookWidget {
               ),
             ),
             MovesSequence(
-              movesSequence: movesToImagine,
+              movesSequence: game.movesToImagine,
               firstMoveNumber: firstMoveNumber,
               firstMoveIsWhiteTurn: firstMoveIsWhiteTurn,
             ),
