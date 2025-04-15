@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:simple_chess_board/simple_chess_board.dart';
+import 'package:visualize_chess/pages/question/moves_sequence.dart';
 
 class QuestionPage extends HookWidget {
   final String startPositionFen;
@@ -16,6 +17,9 @@ class QuestionPage extends HookWidget {
   Widget build(BuildContext context) {
     final maxWidth = MediaQuery.of(context).size.width;
     final boardWidth = maxWidth < 500 ? maxWidth : 500;
+    final firstMoveNumber = int.parse(startPositionFen.split(" ")[5]);
+    final firstMoveIsWhiteTurn = startPositionFen.split(" ")[1] == "w";
+
     return Scaffold(
       appBar: AppBar(title: const Text('Question Page')),
       body: Center(
@@ -35,6 +39,11 @@ class QuestionPage extends HookWidget {
                 cellHighlights: {},
                 chessBoardColors: ChessBoardColors(),
               ),
+            ),
+            MovesSequence(
+              movesSequence: movesToImagine,
+              firstMoveNumber: firstMoveNumber,
+              firstMoveIsWhiteTurn: firstMoveIsWhiteTurn,
             ),
           ],
         ),

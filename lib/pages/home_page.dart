@@ -1,6 +1,6 @@
 import 'package:chess/chess.dart';
 import 'package:flutter/material.dart';
-import './question_page.dart';
+import 'question/question_page.dart';
 import '../logic/position_generation.dart';
 
 const maxAttempts = 10;
