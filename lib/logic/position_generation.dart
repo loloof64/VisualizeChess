@@ -7,9 +7,10 @@ final random = Random();
 class NoLegalMoveException implements Exception {}
 
 String generatePosition() {
+  final shouldBeBlackTurn = random.nextBool();
   final chessLogic = Chess();
   final movesToPlayCount = random.nextInt(141);
-  final halfMovesToPlay = movesToPlayCount * 2;
+  final halfMovesToPlay = movesToPlayCount * 2 + (shouldBeBlackTurn ? 1 : 0);
 
   for (int i = 0; i < halfMovesToPlay; i++) {
     final legalMoves = chessLogic.moves();
@@ -23,10 +24,13 @@ String generatePosition() {
   return chessLogic.fen;
 }
 
-List<String> generateMovesSequences({required String startPositionFen, required int movesToPlayCount}) {
+List<String> generateMovesSequences({
+  required String startPositionFen,
+  required int movesToPlayCount,
+}) {
   final chessLogic = Chess.fromFEN(startPositionFen);
   final halfMovesToPlay = movesToPlayCount * 2;
-  final movesSequence = <String>[]; 
+  final movesSequence = <String>[];
 
   for (int i = 0; i < halfMovesToPlay; i++) {
     final legalMoves = chessLogic.moves();

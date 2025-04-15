@@ -23,11 +23,15 @@ class MovesSequence extends StatelessWidget {
     sequenceWidgets.add(firstNode);
 
     for (int i = 0; i < movesSequence.length; i++) {
-      final mustAddMoveNumber = i % 2 == 0 && i != 0;
+      final mustAddMoveNumber =
+          (((i % 2 == 0) && firstMoveIsWhiteTurn) ||
+              ((i % 2 != 0) && !firstMoveIsWhiteTurn)) &&
+          i > 0;
       if (mustAddMoveNumber) {
         sequenceWidgets.add(
           _buildMoveNumberWidget(
-            moveNumber: firstMoveNumber + (i ~/ 2),
+            moveNumber:
+                firstMoveNumber + ((firstMoveIsWhiteTurn ? i : i + 1) ~/ 2),
             isWhiteTurn: true,
           ),
         );
