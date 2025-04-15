@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import './fan_converter.dart';
 
 class MovesSequence extends StatelessWidget {
   final bool firstMoveIsWhiteTurn;
@@ -38,7 +39,11 @@ class MovesSequence extends StatelessWidget {
       }
       sequenceWidgets.add(
         Text(
-          movesSequence[i],
+          movesSequence[i].toFan(
+            whiteMove:
+                (firstMoveIsWhiteTurn && i % 2 == 0) ||
+                (!firstMoveIsWhiteTurn && i % 2 != 0),
+          ),
           style: const TextStyle(fontWeight: FontWeight.bold),
         ),
       );
