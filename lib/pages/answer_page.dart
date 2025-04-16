@@ -2,6 +2,7 @@ import 'package:editable_chess_board/editable_chess_board.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:simple_chess_board/simple_chess_board.dart';
+import 'package:visualize_chess/pages/correction_page.dart';
 import 'package:visualize_chess/pages/widgets/moves_sequence.dart';
 import 'package:visualize_chess/providers/game.dart';
 import 'package:chess/chess.dart' as chess;
@@ -39,6 +40,14 @@ class _AnswerPageState extends ConsumerState<AnswerPage> {
 
     final game = ref.read(gameInstanceProvider.notifier);
     game.setUserSolutionFen(newPositionFen);
+
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute(
+        builder: (context) {
+          return const CorrectionPage();
+        }
+      )
+    );
   }
 
   @override

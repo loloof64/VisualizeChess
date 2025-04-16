@@ -44,3 +44,15 @@ List<String> generateMovesSequences({
 
   return movesSequence;
 }
+
+
+String getFinalPosition({
+  required String startPositionFen,
+  required List<String> movesSequence,
+}) {
+  final chessLogic = Chess.fromFEN(startPositionFen);
+  for (final move in movesSequence) {
+    chessLogic.move(move);
+  }
+  return chessLogic.fen;
+}

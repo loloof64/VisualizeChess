@@ -43,6 +43,10 @@ class HomePage extends ConsumerWidget {
 
     final firstMoveIsWhiteTurn = startPositionFen.split(" ")[1] == "w";
     final firstMoveNumber = int.parse(startPositionFen.split(" ")[5]);
+    final expectedSolutionFen = getFinalPosition(
+      startPositionFen: startPositionFen,
+      movesSequence: movesToImagine,
+    );
 
     final gameNotifier = ref.read(gameInstanceProvider.notifier);
     gameNotifier.setStartPositionFen(startPositionFen);
@@ -50,6 +54,7 @@ class HomePage extends ConsumerWidget {
     gameNotifier.setMovesToImagine(movesToImagine);
     gameNotifier.setFirstMoveIsWhiteTurn(firstMoveIsWhiteTurn);
     gameNotifier.setFirstMoveNumber(firstMoveNumber);
+    gameNotifier.setExpectedSolutionFen(expectedSolutionFen);
 
     Navigator.of(context).push(
       MaterialPageRoute(
