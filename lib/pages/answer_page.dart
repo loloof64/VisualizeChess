@@ -4,6 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:simple_chess_board/simple_chess_board.dart';
 import 'package:visualize_chess/pages/widgets/moves_sequence.dart';
 import 'package:visualize_chess/providers/game.dart';
+import 'package:chess/chess.dart' as chess;
 
 const emptyBoardFen = "8/8/8/8/8/8/8/8 w - - 0 1";
 
@@ -16,45 +17,144 @@ class AnswerPage extends ConsumerStatefulWidget {
 
 class _AnswerPageState extends ConsumerState<AnswerPage> {
   final _positionController = PositionController(emptyBoardFen);
+  var showQuestionZone = false;
+
+  void _submitAnswer() {
+    final newPositionFen = _positionController.position;
+    final gameLogic = chess.Chess();
+    final isLegalPosition = gameLogic.load(newPositionFen, check_validity: true);
+    final hasBothKings = gameLogic.kings[chess.Color.WHITE] > 0 &&
+        gameLogic.kings[chess.Chess.BLACK] > 0;
+
+
+    if (!isLegalPosition || !hasBothKings) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Illegal position'),
+          backgroundColor: Colors.red,
+        ),
+      );
+      return;
+    }
+
+    final game = ref.read(gameInstanceProvider.notifier);
+    game.setUserSolutionFen(newPositionFen);
+  }
 
   @override
   Widget build(BuildContext context) {
     final maxWidth = MediaQuery.of(context).size.width;
     final boardWidth = maxWidth < 500.0 ? maxWidth : 500.0;
     final game = ref.watch(gameInstanceProvider);
+    final isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
 
-    return Column(
-      spacing: 20,
+    final answerZone = Column(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        EditableChessBoard(
-          boardSize: boardWidth,
-          labels: Labels(
-            playerTurnLabel: 'Player turn :',
-            whitePlayerLabel: 'White',
-            blackPlayerLabel: 'Black',
-            availableCastlesLabel: 'Available castles :',
-            whiteOOLabel: 'White O-O',
-            whiteOOOLabel: 'White O-O-O',
-            blackOOLabel: 'Black O-O',
-            blackOOOLabel: 'Black O-O-O',
-            enPassantLabel: 'En passant square :',
-            drawHalfMovesCountLabel: 'Draw half moves count : ',
-            moveNumberLabel: 'Move number : ',
-            submitFieldLabel: 'Validate',
-            currentPositionLabel: 'Current position: ',
-            copyFenLabel: 'Copy position',
-            pasteFenLabel: 'Paste position',
-            resetPosition: 'Reset position',
-            standardPosition: 'Standard position',
-            erasePosition: 'Erase position',
-          ),
-          controller: _positionController,
-          showAdvancedOptions: false,
-        ),
         SizedBox(
-          width: 300.0,
+          width: boardWidth.toDouble(),
+          height: boardWidth.toDouble(),
+          child: EditableChessBoard(
+            boardSize: boardWidth * 0.9,
+            labels: Labels(
+              playerTurnLabel: 'Player turn :',
+              whitePlayerLabel: 'White',
+              blackPlayerLabel: 'Black',
+              availableCastlesLabel: 'Available castles :',
+              whiteOOLabel: 'White O-O',
+              whiteOOOLabel: 'White O-O-O',
+              blackOOLabel: 'Black O-O',
+              blackOOOLabel: 'Black O-O-O',
+              enPassantLabel: 'En passant square :',
+              drawHalfMovesCountLabel: 'Draw half moves count : ',
+              moveNumberLabel: 'Move number : ',
+              submitFieldLabel: 'Validate',
+              currentPositionLabel: 'Current position: ',
+              copyFenLabel: 'Copy position',
+              pasteFenLabel: 'Paste position',
+              resetPosition: 'Reset position',
+              standardPosition: 'Standard position',
+              erasePosition: 'Erase position',
+            ),
+            controller: _positionController,
+            showAdvancedOptions: false,
+          ),
+        ),
+        ElevatedButton(onPressed: _submitAnswer, child: Text("Submit")),
+      ],
+    );
+
+    final questionZone = QuestionZone(
+      startPositionFen: game.startPositionFen,
+      movesToImagine: game.movesToImagine,
+      firstMoveNumber: game.firstMoveNumber,
+      firstMoveIsWhiteTurn: game.firstMoveIsWhiteTurn,
+    );
+    final content =
+        isLandscape
+            ? Row(
+              spacing: 20,
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [answerZone, if (showQuestionZone) questionZone],
+            )
+            : Stack(
+              alignment: Alignment.center,
+              children: [
+                answerZone,
+                if (showQuestionZone)
+                  Container(color: Colors.white54, child: questionZone),
+              ],
+            );
+
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Answer Page'),
+        actions: [
+          IconButton(
+            onPressed:
+                () => setState(() {
+                  showQuestionZone = !showQuestionZone;
+                }),
+            icon: Icon(
+              Icons.notes,
+              color: showQuestionZone ? Colors.red : Colors.green,
+            ),
+          ),
+        ],
+      ),
+      body: content,
+    );
+  }
+}
+
+class QuestionZone extends StatelessWidget {
+  final String startPositionFen;
+  final List<String> movesToImagine;
+  final bool firstMoveIsWhiteTurn;
+  final int firstMoveNumber;
+
+  const QuestionZone({
+    super.key,
+    required this.startPositionFen,
+    required this.movesToImagine,
+    required this.firstMoveIsWhiteTurn,
+    required this.firstMoveNumber,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        SizedBox(
+          width: 250.0,
           child: SimpleChessBoard(
-            fen: game.startPositionFen,
+            fen: startPositionFen,
             whitePlayerType: PlayerType.computer,
             blackPlayerType: PlayerType.computer,
             onMove: ({required ShortMove move}) {},
@@ -72,9 +172,9 @@ class _AnswerPageState extends ConsumerState<AnswerPage> {
           ),
         ),
         MovesSequence(
-          movesSequence: game.movesToImagine,
-          firstMoveIsWhiteTurn: game.firstMoveIsWhiteTurn,
-          firstMoveNumber: game.firstMoveNumber,
+          movesSequence: movesToImagine,
+          firstMoveIsWhiteTurn: firstMoveIsWhiteTurn,
+          firstMoveNumber: firstMoveNumber,
         ),
       ],
     );
