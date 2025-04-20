@@ -6,10 +6,13 @@ final random = Random();
 
 class NoLegalMoveException implements Exception {}
 
-String generatePosition() {
+final maxMovesToPlayCount = 160;
+
+String generatePosition({int minMovesCount = 1}) {
   final shouldBeBlackTurn = random.nextBool();
   final chessLogic = Chess();
-  final movesToPlayCount = random.nextInt(141);
+  final int valuesRange = maxMovesToPlayCount - minMovesCount + 1;
+  final movesToPlayCount = random.nextInt(valuesRange+1) + minMovesCount;
   final halfMovesToPlay = movesToPlayCount * 2 + (shouldBeBlackTurn ? 1 : 0);
 
   for (int i = 0; i < halfMovesToPlay; i++) {
