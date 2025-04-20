@@ -13,11 +13,8 @@ class CorrectionPage extends ConsumerStatefulWidget {
 }
 
 class _CorrectionPageState extends ConsumerState<CorrectionPage> {
-  var showQuestionZone = false;
   @override
   Widget build(BuildContext context) {
-    final isLandscape =
-        MediaQuery.of(context).orientation == Orientation.landscape;
     final game = ref.watch(gameInstanceProvider);
     final highlightedCells = generateCellsHighlights(
       expectedSolutionFen: game.expectedSolutionFen,
@@ -28,6 +25,17 @@ class _CorrectionPageState extends ConsumerState<CorrectionPage> {
       movesToImagine: game.movesToImagine,
       firstMoveNumber: game.firstMoveNumber,
       firstMoveIsWhiteTurn: game.firstMoveIsWhiteTurn,
+    );
+    final userAnswerZone = SimpleChessBoard(
+      fen: game.userSolutionFen,
+      whitePlayerType: PlayerType.computer,
+      blackPlayerType: PlayerType.computer,
+      onMove: ({required ShortMove move}) {},
+      onPromote: () async => null,
+      onPromotionCommited: ({required moveDone, required pieceType}) {},
+      onTap: ({required cellCoordinate}) {},
+      cellHighlights: {},
+      chessBoardColors: ChessBoardColors(),
     );
     final correctionZone = SimpleChessBoard(
       fen: game.expectedSolutionFen,
@@ -40,40 +48,26 @@ class _CorrectionPageState extends ConsumerState<CorrectionPage> {
       cellHighlights: highlightedCells,
       chessBoardColors: ChessBoardColors(),
     );
-    final content =
-        isLandscape
-            ? Row(
-              spacing: 20,
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [correctionZone, if (showQuestionZone) questionZone],
-            )
-            : Stack(
-              alignment: Alignment.center,
-              children: [
-                correctionZone,
-                if (showQuestionZone)
-                  Container(color: Colors.white54, child: questionZone),
-              ],
-            );
 
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Correction Page'),
-        actions: [
-          IconButton(
-            onPressed:
-                () => setState(() {
-                  showQuestionZone = !showQuestionZone;
-                }),
-            icon: Icon(
-              Icons.notes,
-              color: showQuestionZone ? Colors.red : Colors.green,
-            ),
+    return DefaultTabController(
+      length: 3,
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Correction Page'),
+          bottom: TabBar(
+            tabs: [
+              Tab(text: 'Correction'),
+              Tab(text: 'Your answer'),
+              Tab(text: 'Question'),
+            ],
           ),
-        ],
+        ),
+        body: Center(
+          child: TabBarView(
+            children: [correctionZone, userAnswerZone, questionZone],
+          ),
+        ),
       ),
-      body: Center(child: content),
     );
   }
 }
