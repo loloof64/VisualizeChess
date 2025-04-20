@@ -18,15 +18,17 @@ class AnswerPage extends ConsumerStatefulWidget {
 
 class _AnswerPageState extends ConsumerState<AnswerPage> {
   final _positionController = PositionController(emptyBoardFen);
-  var showQuestionZone = false;
 
   void _submitAnswer() {
     final newPositionFen = _positionController.position;
     final gameLogic = chess.Chess();
-    final isLegalPosition = gameLogic.load(newPositionFen, check_validity: true);
-    final hasBothKings = gameLogic.kings[chess.Color.WHITE] > 0 &&
+    final isLegalPosition = gameLogic.load(
+      newPositionFen,
+      check_validity: true,
+    );
+    final hasBothKings =
+        gameLogic.kings[chess.Color.WHITE] > 0 &&
         gameLogic.kings[chess.Chess.BLACK] > 0;
-
 
     if (!isLegalPosition || !hasBothKings) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -45,8 +47,8 @@ class _AnswerPageState extends ConsumerState<AnswerPage> {
       MaterialPageRoute(
         builder: (context) {
           return const CorrectionPage();
-        }
-      )
+        },
+      ),
     );
   }
 
@@ -55,8 +57,6 @@ class _AnswerPageState extends ConsumerState<AnswerPage> {
     final maxWidth = MediaQuery.of(context).size.width;
     final boardWidth = maxWidth < 500.0 ? maxWidth : 500.0;
     final game = ref.watch(gameInstanceProvider);
-    final isLandscape =
-        MediaQuery.of(context).orientation == Orientation.landscape;
 
     final answerZone = Column(
       mainAxisSize: MainAxisSize.min,
@@ -102,40 +102,18 @@ class _AnswerPageState extends ConsumerState<AnswerPage> {
       firstMoveNumber: game.firstMoveNumber,
       firstMoveIsWhiteTurn: game.firstMoveIsWhiteTurn,
     );
-    final content =
-        isLandscape
-            ? Row(
-              spacing: 20,
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [answerZone, if (showQuestionZone) questionZone],
-            )
-            : Stack(
-              alignment: Alignment.center,
-              children: [
-                answerZone,
-                if (showQuestionZone)
-                  Container(color: Colors.white54, child: questionZone),
-              ],
-            );
 
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Answer Page'),
-        actions: [
-          IconButton(
-            onPressed:
-                () => setState(() {
-                  showQuestionZone = !showQuestionZone;
-                }),
-            icon: Icon(
-              Icons.notes,
-              color: showQuestionZone ? Colors.red : Colors.green,
-            ),
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Answer Page'),
+          bottom: const TabBar(
+            tabs: [Tab(text: "Your answer"), Tab(text: "Question")],
           ),
-        ],
+        ),
+        body: TabBarView(children: [answerZone, questionZone]),
       ),
-      body: content,
     );
   }
 }
