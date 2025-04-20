@@ -134,12 +134,14 @@ class QuestionZone extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final minScreenSize = MediaQuery.of(context).size.shortestSide;
+    final width = minScreenSize * 0.75;
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         SizedBox(
-          width: 250.0,
+          width: width,
           child: SimpleChessBoard(
             fen: startPositionFen,
             whitePlayerType: PlayerType.computer,
