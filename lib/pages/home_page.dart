@@ -1,28 +1,93 @@
 import 'package:chess/chess.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:visualize_chess/pages/widgets/game_parameters.dart';
 import 'package:visualize_chess/providers/game.dart';
 import 'question_page.dart';
 import '../logic/position_generation.dart';
 
 const maxAttempts = 10;
-const movesToPlayCount = 2;
 
 class HomePage extends ConsumerWidget {
   const HomePage({super.key});
 
-  void _goToQuestionPage(BuildContext context, WidgetRef ref) {
+  void _purposeGameParametersModal(BuildContext context, WidgetRef ref) async {
+    final gameParameters = await showDialog<GameParameters>(
+      context: context,
+      builder: (context) {
+        NumberController minMovesCountController = NumberController(
+          defaultValue: 1,
+        );
+        NumberController movesToPlayCountController = NumberController(
+          defaultValue: 1,
+        );
+        return AlertDialog(
+          title: const Text('Game parameters'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text(
+                'Cancel',
+                style: TextStyle(color: Theme.of(context).colorScheme.tertiary),
+              ),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(
+                  GameParameters(
+                    minPositionGenerationMovesCount:
+                        minMovesCountController.value,
+                    movesToPlayCount: movesToPlayCountController.value,
+                  ),
+                );
+              },
+              child: Text(
+                'Ok',
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.secondary,
+                ),
+              ),
+            ),
+          ],
+          content: GameParametersWidget(
+            minMovesCountController: minMovesCountController,
+            movesToPlayCountController: movesToPlayCountController,
+          ),
+        );
+      },
+    );
+
+    if (gameParameters == null) {
+      return;
+    }
+
+    if (!context.mounted) {
+      return;
+    }
+
+    _goToQuestionPage(context, ref, gameParameters);
+  }
+
+  void _goToQuestionPage(
+    BuildContext context,
+    WidgetRef ref,
+    GameParameters gameParameters,
+  ) {
     String startPositionFen = Chess.DEFAULT_POSITION;
     List<String> movesToImagine = [];
 
     for (int i = 0; i < maxAttempts; i++) {
       try {
-        startPositionFen = _generateStartPosition();
+        startPositionFen = _generateStartPosition(
+          gameParameters.minPositionGenerationMovesCount,
+        );
         movesToImagine = generateMovesToImagine(
           startPositionFen: startPositionFen,
-          movesToPlayCount: movesToPlayCount,
+          movesToPlayCount: gameParameters.movesToPlayCount,
         );
-        if (movesToImagine.length == 2 * movesToPlayCount) {
+        if (movesToImagine.length == 2 * gameParameters.movesToPlayCount) {
           break;
         }
       } on NoLegalMoveException {
@@ -30,7 +95,8 @@ class HomePage extends ConsumerWidget {
       }
     }
 
-    final isError = movesToImagine.length != 2 * movesToPlayCount;
+    final isError =
+        movesToImagine.length != 2 * gameParameters.movesToPlayCount;
     if (isError) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
@@ -50,7 +116,7 @@ class HomePage extends ConsumerWidget {
 
     final gameNotifier = ref.read(gameInstanceProvider.notifier);
     gameNotifier.setStartPositionFen(startPositionFen);
-    gameNotifier.setMovesToPlayCount(movesToPlayCount);
+    gameNotifier.setMovesToPlayCount(gameParameters.movesToPlayCount);
     gameNotifier.setMovesToImagine(movesToImagine);
     gameNotifier.setFirstMoveIsWhiteTurn(firstMoveIsWhiteTurn);
     gameNotifier.setFirstMoveNumber(firstMoveNumber);
@@ -70,10 +136,12 @@ class HomePage extends ConsumerWidget {
     return chessLogic.game_over;
   }
 
-  String _generateStartPosition() {
+  String _generateStartPosition(int minPositionGenerationMovesCount) {
     String startPositionFen;
     do {
-      startPositionFen = generatePosition();
+      startPositionFen = generatePosition(
+        minMovesCount: minPositionGenerationMovesCount,
+      );
     } while (_isGameFinishedFor(startPositionFen));
     return startPositionFen;
   }
@@ -94,7 +162,7 @@ class HomePage extends ConsumerWidget {
       appBar: AppBar(title: const Text('Home Page')),
       body: Center(
         child: ElevatedButton(
-          onPressed: () => _goToQuestionPage(context, ref),
+          onPressed: () => _purposeGameParametersModal(context, ref),
           child: Text("New game"),
         ),
       ),
