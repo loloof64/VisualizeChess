@@ -671,10 +671,10 @@ packages:
     dependency: "direct main"
     description:
       name: simple_chess_board
-      sha256: "9203213f2e1798c11566fd0c3648249d931b4dc2af71789af1cb6e5e822b500a"
+      sha256: d24c0a14b4208c34d89ac4694b620b26895c5de0ad532d3626e59763c6a61832
       url: "https://pub.dev"
     source: hosted
-    version: "1.6.0"
+    version: "1.7.0"
   sky_engine:
     dependency: transitive
     description: flutter
