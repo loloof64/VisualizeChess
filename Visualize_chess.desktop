@@ -1,6 +1,6 @@
 [Desktop Entry]
 Type=Application
-Version=1.0.1
+Version=1.0.2
 Name=Visualize Chess
 Comment=Chess move visualization training
 Exec=visualize_chess
