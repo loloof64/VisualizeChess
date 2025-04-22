@@ -15,7 +15,7 @@ AppDir:
     id: com.loloof64.visualize_chess
     name: Visualize Chess
     icon: icon
-    version: 1.0.2
+    version: 1.0.3
     exec: visualize_chess
     exec_args: $@
   apt:
