@@ -1,6 +1,7 @@
 import 'package:chess/chess.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:visualize_chess/pages/widgets/common_drawer.dart';
 import 'package:visualize_chess/pages/widgets/game_parameters.dart';
 import 'package:visualize_chess/providers/game.dart';
 import 'question_page.dart';
@@ -160,6 +161,7 @@ class HomePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
+      drawer: CommonDrawer(),
       appBar: AppBar(title: Text(t.pages.home.title)),
       body: Center(
         child: ElevatedButton(

@@ -43,6 +43,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 
   // Translations
   late final TranslationsMiscEn misc = TranslationsMiscEn.internal(_root);
+  late final TranslationsOptionsEn options = TranslationsOptionsEn.internal(_root);
   late final TranslationsWidgetsEn widgets = TranslationsWidgetsEn.internal(_root);
   late final TranslationsPagesEn pages = TranslationsPagesEn.internal(_root);
 }
@@ -57,6 +58,17 @@ class TranslationsMiscEn {
   String get ok => 'Ok';
   String get cancel => 'Cancel';
   String get submit => 'Submit';
+}
+
+// Path: options
+class TranslationsOptionsEn {
+  TranslationsOptionsEn.internal(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+  String get title => 'Options';
+  late final TranslationsOptionsDarkModeEn dark_mode = TranslationsOptionsDarkModeEn.internal(_root);
 }
 
 // Path: widgets
@@ -80,6 +92,16 @@ class TranslationsPagesEn {
   late final TranslationsPagesQuestionEn question = TranslationsPagesQuestionEn.internal(_root);
   late final TranslationsPagesAnswerEn answer = TranslationsPagesAnswerEn.internal(_root);
   late final TranslationsPagesCorrectionEn correction = TranslationsPagesCorrectionEn.internal(_root);
+}
+
+// Path: options.dark_mode
+class TranslationsOptionsDarkModeEn {
+  TranslationsOptionsDarkModeEn.internal(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+  String get label => 'Dark mode';
 }
 
 // Path: widgets.game_parameters

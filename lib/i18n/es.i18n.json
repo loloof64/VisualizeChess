@@ -4,6 +4,12 @@
     "cancel": "Anular",
     "submit": "Enviar"
   },
+  "options": {
+    "title": "Opciones",
+    "dark_mode": {
+      "label": "Modo oscuro"
+    }
+  },
   "widgets": {
     "game_parameters": {
       "position_generation_minimum_moves": "Movimientos mínimos desde inicio:",

@@ -47,10 +47,7 @@ class MovesSequence extends HookWidget {
                 (firstMoveIsWhiteTurn && i % 2 == 0) ||
                 (!firstMoveIsWhiteTurn && i % 2 != 0),
           ),
-          style: const TextStyle(
-            fontFamily: "FreeSerif",
-            fontSize: fontSize,
-          ),
+          style: const TextStyle(fontFamily: "FreeSerif", fontSize: fontSize),
         ),
       );
     }
@@ -64,16 +61,12 @@ class MovesSequence extends HookWidget {
     final caption = "$moveNumber.${isWhiteTurn ? "" : ".."}";
     return Text(
       caption,
-      style: const TextStyle(
-        fontFamily: "FreeSerif",
-        fontSize: fontSize,
-      ),
+      style: const TextStyle(fontFamily: "FreeSerif", fontSize: fontSize),
     );
   }
 
   @override
   Widget build(BuildContext context) {
-
     final scrollController = useScrollController();
 
     return Scrollbar(

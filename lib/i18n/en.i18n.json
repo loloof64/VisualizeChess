@@ -4,6 +4,12 @@
     "cancel": "Cancel",
     "submit": "Submit"
   },
+  "options": {
+    "title": "Options",
+    "dark_mode": {
+      "label": "Dark mode"
+    }
+  },
   "widgets": {
     "game_parameters": {
       "position_generation_minimum_moves": "Minimum moves from beginning: ",

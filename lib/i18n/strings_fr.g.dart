@@ -42,6 +42,8 @@ class TranslationsFr extends Translations {
   @override
   late final _TranslationsMiscFr misc = _TranslationsMiscFr._(_root);
   @override
+  late final _TranslationsOptionsFr options = _TranslationsOptionsFr._(_root);
+  @override
   late final _TranslationsWidgetsFr widgets = _TranslationsWidgetsFr._(_root);
   @override
   late final _TranslationsPagesFr pages = _TranslationsPagesFr._(_root);
@@ -60,6 +62,19 @@ class _TranslationsMiscFr extends TranslationsMiscEn {
   String get cancel => 'Annuler';
   @override
   String get submit => 'Envoyer';
+}
+
+// Path: options
+class _TranslationsOptionsFr extends TranslationsOptionsEn {
+  _TranslationsOptionsFr._(TranslationsFr root) : this._root = root, super.internal(root);
+
+  final TranslationsFr _root; // ignore: unused_field
+
+  // Translations
+  @override
+  String get title => 'Options';
+  @override
+  late final _TranslationsOptionsDarkModeFr dark_mode = _TranslationsOptionsDarkModeFr._(_root);
 }
 
 // Path: widgets
@@ -88,6 +103,17 @@ class _TranslationsPagesFr extends TranslationsPagesEn {
   late final _TranslationsPagesAnswerFr answer = _TranslationsPagesAnswerFr._(_root);
   @override
   late final _TranslationsPagesCorrectionFr correction = _TranslationsPagesCorrectionFr._(_root);
+}
+
+// Path: options.dark_mode
+class _TranslationsOptionsDarkModeFr extends TranslationsOptionsDarkModeEn {
+  _TranslationsOptionsDarkModeFr._(TranslationsFr root) : this._root = root, super.internal(root);
+
+  final TranslationsFr _root; // ignore: unused_field
+
+  // Translations
+  @override
+  String get label => 'Thème sombre';
 }
 
 // Path: widgets.game_parameters

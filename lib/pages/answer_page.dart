@@ -4,6 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:simple_chess_board/simple_chess_board.dart';
 import 'package:visualize_chess/i18n/strings.g.dart';
 import 'package:visualize_chess/pages/correction_page.dart';
+import 'package:visualize_chess/pages/widgets/common_drawer.dart';
 import 'package:visualize_chess/pages/widgets/moves_sequence.dart';
 import 'package:visualize_chess/providers/game.dart';
 import 'package:chess/chess.dart' as chess;
@@ -107,7 +108,32 @@ class _AnswerPageState extends ConsumerState<AnswerPage> {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
+        drawer: CommonDrawer(),
         appBar: AppBar(
+          leading: Builder(
+            builder: (context) {
+              return SizedBox(
+                width: 80,
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Flexible(
+                      child: IconButton(
+                        onPressed: () => Scaffold.of(context).openDrawer(),
+                        icon: Icon(Icons.menu),
+                      ),
+                    ),
+                    Flexible(
+                      child: IconButton(
+                        onPressed: () => Navigator.of(context).pop(),
+                        icon: Icon(Icons.arrow_back),
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            },
+          ),
           title: Text(t.pages.answer.title),
           bottom: TabBar(
             tabs: [

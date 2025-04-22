@@ -4,6 +4,7 @@ import 'package:simple_chess_board/simple_chess_board.dart';
 import 'package:visualize_chess/i18n/strings.g.dart';
 import 'package:visualize_chess/logic/board_cells_highlights.dart';
 import 'package:visualize_chess/pages/answer_page.dart';
+import 'package:visualize_chess/pages/widgets/common_drawer.dart';
 import 'package:visualize_chess/providers/game.dart';
 
 class CorrectionPage extends ConsumerStatefulWidget {
@@ -53,7 +54,32 @@ class _CorrectionPageState extends ConsumerState<CorrectionPage> {
     return DefaultTabController(
       length: 3,
       child: Scaffold(
+        drawer: CommonDrawer(),
         appBar: AppBar(
+          leading: Builder(
+            builder: (context) {
+              return SizedBox(
+                width: 80,
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Flexible(
+                      child: IconButton(
+                        onPressed: () => Scaffold.of(context).openDrawer(),
+                        icon: Icon(Icons.menu),
+                      ),
+                    ),
+                    Flexible(
+                      child: IconButton(
+                        onPressed: () => Navigator.of(context).pop(),
+                        icon: Icon(Icons.arrow_back),
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            },
+          ),
           title: Text(t.pages.correction.title),
           bottom: TabBar(
             tabs: [

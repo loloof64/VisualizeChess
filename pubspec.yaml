@@ -46,6 +46,8 @@ dependencies:
   slang_flutter: ^4.7.0
   flutter_localizations:
     sdk: flutter
+  shared_preferences: ^2.5.3
+  flex_color_scheme: ^8.2.0
 
 dev_dependencies:
   flutter_test:

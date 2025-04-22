@@ -1,38 +1,43 @@
 {
-    "misc": {
-      "ok": "Ok",
-      "cancel": "Annuler",
-      "submit": "Envoyer"
+  "misc": {
+    "ok": "Ok",
+    "cancel": "Annuler",
+    "submit": "Envoyer"
+  },
+  "options": {
+    "title": "Options",
+    "dark_mode": {
+      "label": "Thème sombre"
+    }
+  },
+  "widgets": {
+    "game_parameters": {
+      "position_generation_minimum_moves": "Coups minimum depuis début: ",
+      "moves_to_play": "Nombre de coups: "
+    }
+  },
+  "pages": {
+    "home": {
+      "title": "Page accueil",
+      "game_parameters": "Paramètres de jeu",
+      "new_game": "Nouvelle partie",
+      "generation_error": "Échec de la generation d'une position et de sa séquence de coups."
     },
-    "widgets": {
-      "game_parameters": {
-        "position_generation_minimum_moves": "Coups minimum depuis début: ",
-        "moves_to_play": "Nombre de coups: "
-      }
+    "question": {
+      "title": "Page question",
+      "ready": "Je suis prêt"
     },
-    "pages": {
-      "home": {
-        "title": "Page accueil",
-        "game_parameters": "Paramètres de jeu",
-        "new_game": "Nouvelle partie",
-        "generation_error": "Échec de la generation d'une position et de sa séquence de coups."
-      },
-      "question": {
-        "title": "Page question",
-        "ready": "Je suis prêt"
-      },
-      "answer": {
-        "title": "Page réponse",
-        "illegal_position": "Position illégale",
-        "your_answer": "Votre réponse",
-        "question": "Question"
-      },
-      "correction": {
-        "title": "Page correction",
-        "correction": "Correction",
-        "your_answer": "Votre réponse",
-        "question": "Question"
-      }
+    "answer": {
+      "title": "Page réponse",
+      "illegal_position": "Position illégale",
+      "your_answer": "Votre réponse",
+      "question": "Question"
+    },
+    "correction": {
+      "title": "Page correction",
+      "correction": "Correction",
+      "your_answer": "Votre réponse",
+      "question": "Question"
     }
   }
-  
+}
