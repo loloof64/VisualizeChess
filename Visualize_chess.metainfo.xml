@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>io.github.loloof64.visualize_chess</id>
+  
+  <name>Visualize Chess</name>
+  <summary>Chess move visualization training</summary>
+  
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>MIT</project_license>
+  
+  <description>
+    <p>
+      For each new game, you choose the minimum number of moves from start (computer generates a position by playing random moves from the start), and the count of moves to visualize.
+    </p>
+    <p>
+      Then you are given a screen with the generated exercise.
+    </p>
+    <p>
+      After that you'll be able to enter your solution in an interactive chess board.
+    </p>
+    <p>
+      Finally there is a summary page of the correction, your solution and the exercise that was asked to you.
+    </p>
+  </description>
+  
+  <launchable type="desktop-id">Visualize_chess.desktop</launchable>
+  <screenshots>
+  </screenshots>
+</component>
