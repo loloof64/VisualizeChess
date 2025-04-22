@@ -1,0 +1,37 @@
+{
+  "misc": {
+    "ok": "De acuerdo",
+    "cancel": "Anular",
+    "submit": "Enviar"
+  },
+  "widgets": {
+    "game_parameters": {
+      "position_generation_minimum_moves": "Movimientos mínimos (para generación de posición):",
+      "moves_to_play": "Movimientos por jugar:"
+    }
+  },
+  "pages": {
+    "home": {
+      "title": "Página de inicio",
+      "game_parameters": "Parámetros del juego",
+      "new_game": "Nuevo juego",
+      "generation_error": "No se pudo generar una posición y su secuencia de movimientos."
+    },
+    "question": {
+      "title": "Página de pregunta",
+      "ready": "Soy listo"
+    },
+    "answer": {
+      "title": "Página de respuesta",
+      "illegal_position": "Posición ilegal",
+      "your_answer": "Su respuesta",
+      "question": "Pregunta"
+    },
+    "correction": {
+      "title": "Página de correción",
+      "correction": "Corrección",
+      "your_answer": "Su repuesta",
+      "question": "Pregunta"
+    }
+  }
+}

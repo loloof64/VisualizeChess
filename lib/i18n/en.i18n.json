@@ -1,0 +1,37 @@
+{
+  "misc": {
+    "ok": "Ok",
+    "cancel": "Cancel",
+    "submit": "Submit"
+  },
+  "widgets": {
+    "game_parameters": {
+      "position_generation_minimum_moves": "Minimum moves for position generation: ",
+      "moves_to_play": "Moves to play: "
+    }
+  },
+  "pages": {
+    "home": {
+      "title": "Home page",
+      "game_parameters": "Game parameters",
+      "new_game": "New game",
+      "generation_error": "Failed to generate a position and its moves sequence"
+    },
+    "question": {
+      "title": "Question page",
+      "ready": "I'm ready"
+    },
+    "answer": {
+      "title": "Answer page",
+      "illegal_position": "Illegal position",
+      "your_answer": "Your answer",
+      "question": "Question"
+    },
+    "correction": {
+      "title": "Correction page",
+      "correction": "Correction",
+      "your_answer": "Your answer",
+      "question": "Question"
+    }
+  }
+}

@@ -5,6 +5,7 @@ import 'package:visualize_chess/pages/widgets/game_parameters.dart';
 import 'package:visualize_chess/providers/game.dart';
 import 'question_page.dart';
 import '../logic/position_generation.dart';
+import 'package:visualize_chess/i18n/strings.g.dart';
 
 const maxAttempts = 10;
 
@@ -22,14 +23,14 @@ class HomePage extends ConsumerWidget {
           defaultValue: 1,
         );
         return AlertDialog(
-          title: const Text('Game parameters'),
+          title: Text(t.pages.home.game_parameters),
           actions: [
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
               },
               child: Text(
-                'Cancel',
+                t.misc.cancel,
                 style: TextStyle(color: Theme.of(context).colorScheme.tertiary),
               ),
             ),
@@ -44,7 +45,7 @@ class HomePage extends ConsumerWidget {
                 );
               },
               child: Text(
-                'Ok',
+                t.misc.ok,
                 style: TextStyle(
                   color: Theme.of(context).colorScheme.secondary,
                 ),
@@ -99,8 +100,8 @@ class HomePage extends ConsumerWidget {
         movesToImagine.length != 2 * gameParameters.movesToPlayCount;
     if (isError) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Failed to generate a position and its moves sequence'),
+        SnackBar(
+          content: Text(t.pages.home.generation_error),
           backgroundColor: Colors.red,
         ),
       );
@@ -159,11 +160,11 @@ class HomePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Home Page')),
+      appBar: AppBar(title: Text(t.pages.home.title)),
       body: Center(
         child: ElevatedButton(
           onPressed: () => _purposeGameParametersModal(context, ref),
-          child: Text("New game"),
+          child: Text(t.pages.home.new_game),
         ),
       ),
     );

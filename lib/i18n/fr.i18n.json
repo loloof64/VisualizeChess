@@ -1,0 +1,38 @@
+{
+    "misc": {
+      "ok": "Ok",
+      "cancel": "Annuler",
+      "submit": "Envoyer"
+    },
+    "widgets": {
+      "game_parameters": {
+        "position_generation_minimum_moves": "Coups minimum (pour génération de position): ",
+        "moves_to_play": "Nombre de coups à jouer: "
+      }
+    },
+    "pages": {
+      "home": {
+        "title": "Page accueil",
+        "game_parameters": "Paramètres de jeu",
+        "new_game": "Nouvelle partie",
+        "generation_error": "Échec de la generation d'une position et de sa séquence de coups."
+      },
+      "question": {
+        "title": "Page question",
+        "ready": "Je suis prêt"
+      },
+      "answer": {
+        "title": "Page réponse",
+        "illegal_position": "Position illégale",
+        "your_answer": "Votre réponse",
+        "question": "Question"
+      },
+      "correction": {
+        "title": "Page correction",
+        "correction": "Correction",
+        "your_answer": "Votre réponse",
+        "question": "Question"
+      }
+    }
+  }
+  

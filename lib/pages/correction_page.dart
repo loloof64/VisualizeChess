@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:simple_chess_board/simple_chess_board.dart';
+import 'package:visualize_chess/i18n/strings.g.dart';
 import 'package:visualize_chess/logic/board_cells_highlights.dart';
 import 'package:visualize_chess/pages/answer_page.dart';
 import 'package:visualize_chess/providers/game.dart';
@@ -53,12 +54,12 @@ class _CorrectionPageState extends ConsumerState<CorrectionPage> {
       length: 3,
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Correction Page'),
+          title: Text(t.pages.correction.title),
           bottom: TabBar(
             tabs: [
-              Tab(text: 'Correction'),
-              Tab(text: 'Your answer'),
-              Tab(text: 'Question'),
+              Tab(text: t.pages.correction.correction),
+              Tab(text: t.pages.correction.your_answer),
+              Tab(text: t.pages.correction.question),
             ],
           ),
         ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:visualize_chess/i18n/strings.g.dart';
 
 class GameParameters {
   final int minPositionGenerationMovesCount;
@@ -52,7 +53,7 @@ class GameParametersWidgetState extends State<GameParametersWidget> {
       children: [
         Row(
           children: [
-            const Text('Minimum moves for position generation: '),
+            Text(t.widgets.game_parameters.position_generation_minimum_moves),
             Text("$_minGenerationMovesCount"),
             Flexible(
               child: Slider(
@@ -71,7 +72,7 @@ class GameParametersWidgetState extends State<GameParametersWidget> {
         ),
         Row(
           children: [
-            const Text('Moves to play: '),
+            Text(t.widgets.game_parameters.moves_to_play),
             Text("$_movesToPlayCount"),
             Flexible(
               child: Slider(

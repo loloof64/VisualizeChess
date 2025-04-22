@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:simple_chess_board/simple_chess_board.dart';
+import 'package:visualize_chess/i18n/strings.g.dart';
 import 'package:visualize_chess/pages/answer_page.dart';
 import 'package:visualize_chess/pages/widgets/moves_sequence.dart';
 import 'package:visualize_chess/providers/game.dart';
@@ -27,7 +28,7 @@ class QuestionPage extends HookConsumerWidget {
     final firstMoveIsWhiteTurn = game.firstMoveIsWhiteTurn;
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Question Page')),
+      appBar: AppBar(title: Text(t.pages.question.title)),
       body: Center(
         child: Column(
           children: [
@@ -53,7 +54,7 @@ class QuestionPage extends HookConsumerWidget {
             ),
             ElevatedButton(
               onPressed: () => _goToAnswerPage(context),
-              child: Text("I'm ready"),
+              child: Text(t.pages.question.ready),
             ),
           ],
         ),

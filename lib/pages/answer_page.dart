@@ -2,6 +2,7 @@ import 'package:editable_chess_board/editable_chess_board.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:simple_chess_board/simple_chess_board.dart';
+import 'package:visualize_chess/i18n/strings.g.dart';
 import 'package:visualize_chess/pages/correction_page.dart';
 import 'package:visualize_chess/pages/widgets/moves_sequence.dart';
 import 'package:visualize_chess/providers/game.dart';
@@ -32,8 +33,8 @@ class _AnswerPageState extends ConsumerState<AnswerPage> {
 
     if (!isLegalPosition || !hasBothKings) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Illegal position'),
+        SnackBar(
+          content: Text(t.pages.answer.illegal_position),
           backgroundColor: Colors.red,
         ),
       );
@@ -92,7 +93,7 @@ class _AnswerPageState extends ConsumerState<AnswerPage> {
             showAdvancedOptions: false,
           ),
         ),
-        ElevatedButton(onPressed: _submitAnswer, child: Text("Submit")),
+        ElevatedButton(onPressed: _submitAnswer, child: Text(t.misc.submit)),
       ],
     );
 
@@ -107,9 +108,12 @@ class _AnswerPageState extends ConsumerState<AnswerPage> {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Answer Page'),
-          bottom: const TabBar(
-            tabs: [Tab(text: "Your answer"), Tab(text: "Question")],
+          title: Text(t.pages.answer.title),
+          bottom: TabBar(
+            tabs: [
+              Tab(text: t.pages.answer.your_answer),
+              Tab(text: t.pages.answer.question),
+            ],
           ),
         ),
         body: TabBarView(children: [answerZone, questionZone]),
