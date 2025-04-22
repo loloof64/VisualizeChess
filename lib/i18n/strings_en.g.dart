@@ -31,30 +31,25 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
              overrides: overrides ?? {},
              cardinalResolver: cardinalResolver,
              ordinalResolver: ordinalResolver,
-           ) {
-    $meta.setFlatMapFunction(_flatMapFunction);
-  }
+           );
 
   /// Metadata for the translations of <en>.
   @override
   final TranslationMetadata<AppLocale, Translations> $meta;
-
-  /// Access flat map
-  dynamic operator [](String key) => $meta.getTranslation(key);
 
   late final Translations _root = this; // ignore: unused_field
 
   Translations $copyWith({TranslationMetadata<AppLocale, Translations>? meta}) => Translations(meta: meta ?? this.$meta);
 
   // Translations
-  late final TranslationsMiscEn misc = TranslationsMiscEn._(_root);
-  late final TranslationsWidgetsEn widgets = TranslationsWidgetsEn._(_root);
-  late final TranslationsPagesEn pages = TranslationsPagesEn._(_root);
+  late final TranslationsMiscEn misc = TranslationsMiscEn.internal(_root);
+  late final TranslationsWidgetsEn widgets = TranslationsWidgetsEn.internal(_root);
+  late final TranslationsPagesEn pages = TranslationsPagesEn.internal(_root);
 }
 
 // Path: misc
 class TranslationsMiscEn {
-  TranslationsMiscEn._(this._root);
+  TranslationsMiscEn.internal(this._root);
 
   final Translations _root; // ignore: unused_field
 
@@ -66,41 +61,41 @@ class TranslationsMiscEn {
 
 // Path: widgets
 class TranslationsWidgetsEn {
-  TranslationsWidgetsEn._(this._root);
+  TranslationsWidgetsEn.internal(this._root);
 
   final Translations _root; // ignore: unused_field
 
   // Translations
-  late final TranslationsWidgetsGameParametersEn game_parameters = TranslationsWidgetsGameParametersEn._(_root);
+  late final TranslationsWidgetsGameParametersEn game_parameters = TranslationsWidgetsGameParametersEn.internal(_root);
 }
 
 // Path: pages
 class TranslationsPagesEn {
-  TranslationsPagesEn._(this._root);
+  TranslationsPagesEn.internal(this._root);
 
   final Translations _root; // ignore: unused_field
 
   // Translations
-  late final TranslationsPagesHomeEn home = TranslationsPagesHomeEn._(_root);
-  late final TranslationsPagesQuestionEn question = TranslationsPagesQuestionEn._(_root);
-  late final TranslationsPagesAnswerEn answer = TranslationsPagesAnswerEn._(_root);
-  late final TranslationsPagesCorrectionEn correction = TranslationsPagesCorrectionEn._(_root);
+  late final TranslationsPagesHomeEn home = TranslationsPagesHomeEn.internal(_root);
+  late final TranslationsPagesQuestionEn question = TranslationsPagesQuestionEn.internal(_root);
+  late final TranslationsPagesAnswerEn answer = TranslationsPagesAnswerEn.internal(_root);
+  late final TranslationsPagesCorrectionEn correction = TranslationsPagesCorrectionEn.internal(_root);
 }
 
 // Path: widgets.game_parameters
 class TranslationsWidgetsGameParametersEn {
-  TranslationsWidgetsGameParametersEn._(this._root);
+  TranslationsWidgetsGameParametersEn.internal(this._root);
 
   final Translations _root; // ignore: unused_field
 
   // Translations
-  String get position_generation_minimum_moves => 'Minimum moves for position generation: ';
+  String get position_generation_minimum_moves => 'Minimum moves from beginning: ';
   String get moves_to_play => 'Moves to play: ';
 }
 
 // Path: pages.home
 class TranslationsPagesHomeEn {
-  TranslationsPagesHomeEn._(this._root);
+  TranslationsPagesHomeEn.internal(this._root);
 
   final Translations _root; // ignore: unused_field
 
@@ -113,7 +108,7 @@ class TranslationsPagesHomeEn {
 
 // Path: pages.question
 class TranslationsPagesQuestionEn {
-  TranslationsPagesQuestionEn._(this._root);
+  TranslationsPagesQuestionEn.internal(this._root);
 
   final Translations _root; // ignore: unused_field
 
@@ -124,7 +119,7 @@ class TranslationsPagesQuestionEn {
 
 // Path: pages.answer
 class TranslationsPagesAnswerEn {
-  TranslationsPagesAnswerEn._(this._root);
+  TranslationsPagesAnswerEn.internal(this._root);
 
   final Translations _root; // ignore: unused_field
 
@@ -137,7 +132,7 @@ class TranslationsPagesAnswerEn {
 
 // Path: pages.correction
 class TranslationsPagesCorrectionEn {
-  TranslationsPagesCorrectionEn._(this._root);
+  TranslationsPagesCorrectionEn.internal(this._root);
 
   final Translations _root; // ignore: unused_field
 
@@ -146,53 +141,4 @@ class TranslationsPagesCorrectionEn {
   String get correction => 'Correction';
   String get your_answer => 'Your answer';
   String get question => 'Question';
-}
-
-/// Flat map(s) containing all translations.
-/// Only for edge cases! For simple maps, use the map function of this library.
-extension on Translations {
-  dynamic _flatMapFunction(String path) {
-    switch (path) {
-      case 'misc.ok':
-        return 'Ok';
-      case 'misc.cancel':
-        return 'Cancel';
-      case 'misc.submit':
-        return 'Submit';
-      case 'widgets.game_parameters.position_generation_minimum_moves':
-        return 'Minimum moves for position generation: ';
-      case 'widgets.game_parameters.moves_to_play':
-        return 'Moves to play: ';
-      case 'pages.home.title':
-        return 'Home page';
-      case 'pages.home.game_parameters':
-        return 'Game parameters';
-      case 'pages.home.new_game':
-        return 'New game';
-      case 'pages.home.generation_error':
-        return 'Failed to generate a position and its moves sequence';
-      case 'pages.question.title':
-        return 'Question page';
-      case 'pages.question.ready':
-        return 'I\'m ready';
-      case 'pages.answer.title':
-        return 'Answer page';
-      case 'pages.answer.illegal_position':
-        return 'Illegal position';
-      case 'pages.answer.your_answer':
-        return 'Your answer';
-      case 'pages.answer.question':
-        return 'Question';
-      case 'pages.correction.title':
-        return 'Correction page';
-      case 'pages.correction.correction':
-        return 'Correction';
-      case 'pages.correction.your_answer':
-        return 'Your answer';
-      case 'pages.correction.question':
-        return 'Question';
-      default:
-        return null;
-    }
-  }
 }

@@ -6,7 +6,7 @@
   },
   "widgets": {
     "game_parameters": {
-      "position_generation_minimum_moves": "Minimum moves for position generation: ",
+      "position_generation_minimum_moves": "Minimum moves from beginning: ",
       "moves_to_play": "Moves to play: "
     }
   },

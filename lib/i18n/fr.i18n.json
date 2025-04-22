@@ -6,8 +6,8 @@
     },
     "widgets": {
       "game_parameters": {
-        "position_generation_minimum_moves": "Coups minimum (pour génération de position): ",
-        "moves_to_play": "Nombre de coups à jouer: "
+        "position_generation_minimum_moves": "Coups minimum depuis début: ",
+        "moves_to_play": "Nombre de coups: "
       }
     },
     "pages": {

@@ -8,7 +8,7 @@ targets:
           input_directory: lib/i18n
           input_file_pattern: .i18n.json
           output_directory: lib/i18n
-          output_file_name: translations.g.dart
+          output_file_name: strings.g.dart
           lazy: true
           locale_handling: true
           flutter_integration: true

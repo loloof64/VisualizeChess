@@ -50,44 +50,41 @@ class GameParametersWidgetState extends State<GameParametersWidget> {
     return Column(
       spacing: 10,
       mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
           children: [
             Text(t.widgets.game_parameters.position_generation_minimum_moves),
             Text("$_minGenerationMovesCount"),
-            Flexible(
-              child: Slider(
-                value: _minGenerationMovesCount.toDouble(),
-                min: 1,
-                max: 160,
-                onChanged: (newValue) {
-                  setState(() {
-                    _minGenerationMovesCount = newValue.toInt();
-                  });
-                  widget.minMovesCountController.value = newValue.toInt();
-                },
-              ),
-            ),
           ],
+        ),
+        Slider(
+          value: _minGenerationMovesCount.toDouble(),
+          min: 1,
+          max: 160,
+          onChanged: (newValue) {
+            setState(() {
+              _minGenerationMovesCount = newValue.toInt();
+            });
+            widget.minMovesCountController.value = newValue.toInt();
+          },
         ),
         Row(
           children: [
             Text(t.widgets.game_parameters.moves_to_play),
             Text("$_movesToPlayCount"),
-            Flexible(
-              child: Slider(
-                value: _movesToPlayCount.toDouble(),
-                min: 1,
-                max: 10,
-                onChanged: (newValue) {
-                  setState(() {
-                    _movesToPlayCount = newValue.toInt();
-                  });
-                  widget.movesToPlayCountController.value = newValue.toInt();
-                },
-              ),
-            ),
           ],
+        ),
+        Slider(
+          value: _movesToPlayCount.toDouble(),
+          min: 1,
+          max: 10,
+          onChanged: (newValue) {
+            setState(() {
+              _movesToPlayCount = newValue.toInt();
+            });
+            widget.movesToPlayCountController.value = newValue.toInt();
+          },
         ),
       ],
     );

@@ -10,7 +10,7 @@ import 'package:slang/generated.dart';
 import 'strings.g.dart';
 
 // Path: <root>
-class TranslationsEs implements Translations {
+class TranslationsEs extends Translations {
   /// You can call this constructor and build your own translation instance of this locale.
   /// Constructing via the enum [AppLocale.build] is preferred.
   TranslationsEs({
@@ -26,17 +26,12 @@ class TranslationsEs implements Translations {
              overrides: overrides ?? {},
              cardinalResolver: cardinalResolver,
              ordinalResolver: ordinalResolver,
-           ) {
-    $meta.setFlatMapFunction(_flatMapFunction);
-  }
+           ),
+       super(cardinalResolver: cardinalResolver, ordinalResolver: ordinalResolver);
 
   /// Metadata for the translations of <es>.
   @override
   final TranslationMetadata<AppLocale, Translations> $meta;
-
-  /// Access flat map
-  @override
-  dynamic operator [](String key) => $meta.getTranslation(key);
 
   late final TranslationsEs _root = this; // ignore: unused_field
 
@@ -53,8 +48,8 @@ class TranslationsEs implements Translations {
 }
 
 // Path: misc
-class _TranslationsMiscEs implements TranslationsMiscEn {
-  _TranslationsMiscEs._(this._root);
+class _TranslationsMiscEs extends TranslationsMiscEn {
+  _TranslationsMiscEs._(TranslationsEs root) : this._root = root, super.internal(root);
 
   final TranslationsEs _root; // ignore: unused_field
 
@@ -68,8 +63,8 @@ class _TranslationsMiscEs implements TranslationsMiscEn {
 }
 
 // Path: widgets
-class _TranslationsWidgetsEs implements TranslationsWidgetsEn {
-  _TranslationsWidgetsEs._(this._root);
+class _TranslationsWidgetsEs extends TranslationsWidgetsEn {
+  _TranslationsWidgetsEs._(TranslationsEs root) : this._root = root, super.internal(root);
 
   final TranslationsEs _root; // ignore: unused_field
 
@@ -79,8 +74,8 @@ class _TranslationsWidgetsEs implements TranslationsWidgetsEn {
 }
 
 // Path: pages
-class _TranslationsPagesEs implements TranslationsPagesEn {
-  _TranslationsPagesEs._(this._root);
+class _TranslationsPagesEs extends TranslationsPagesEn {
+  _TranslationsPagesEs._(TranslationsEs root) : this._root = root, super.internal(root);
 
   final TranslationsEs _root; // ignore: unused_field
 
@@ -96,21 +91,21 @@ class _TranslationsPagesEs implements TranslationsPagesEn {
 }
 
 // Path: widgets.game_parameters
-class _TranslationsWidgetsGameParametersEs implements TranslationsWidgetsGameParametersEn {
-  _TranslationsWidgetsGameParametersEs._(this._root);
+class _TranslationsWidgetsGameParametersEs extends TranslationsWidgetsGameParametersEn {
+  _TranslationsWidgetsGameParametersEs._(TranslationsEs root) : this._root = root, super.internal(root);
 
   final TranslationsEs _root; // ignore: unused_field
 
   // Translations
   @override
-  String get position_generation_minimum_moves => 'Movimientos mínimos (para generación de posición):';
+  String get position_generation_minimum_moves => 'Movimientos mínimos desde inicio:';
   @override
-  String get moves_to_play => 'Movimientos por jugar:';
+  String get moves_to_play => 'Cuento de movimientos:';
 }
 
 // Path: pages.home
-class _TranslationsPagesHomeEs implements TranslationsPagesHomeEn {
-  _TranslationsPagesHomeEs._(this._root);
+class _TranslationsPagesHomeEs extends TranslationsPagesHomeEn {
+  _TranslationsPagesHomeEs._(TranslationsEs root) : this._root = root, super.internal(root);
 
   final TranslationsEs _root; // ignore: unused_field
 
@@ -126,8 +121,8 @@ class _TranslationsPagesHomeEs implements TranslationsPagesHomeEn {
 }
 
 // Path: pages.question
-class _TranslationsPagesQuestionEs implements TranslationsPagesQuestionEn {
-  _TranslationsPagesQuestionEs._(this._root);
+class _TranslationsPagesQuestionEs extends TranslationsPagesQuestionEn {
+  _TranslationsPagesQuestionEs._(TranslationsEs root) : this._root = root, super.internal(root);
 
   final TranslationsEs _root; // ignore: unused_field
 
@@ -139,8 +134,8 @@ class _TranslationsPagesQuestionEs implements TranslationsPagesQuestionEn {
 }
 
 // Path: pages.answer
-class _TranslationsPagesAnswerEs implements TranslationsPagesAnswerEn {
-  _TranslationsPagesAnswerEs._(this._root);
+class _TranslationsPagesAnswerEs extends TranslationsPagesAnswerEn {
+  _TranslationsPagesAnswerEs._(TranslationsEs root) : this._root = root, super.internal(root);
 
   final TranslationsEs _root; // ignore: unused_field
 
@@ -156,8 +151,8 @@ class _TranslationsPagesAnswerEs implements TranslationsPagesAnswerEn {
 }
 
 // Path: pages.correction
-class _TranslationsPagesCorrectionEs implements TranslationsPagesCorrectionEn {
-  _TranslationsPagesCorrectionEs._(this._root);
+class _TranslationsPagesCorrectionEs extends TranslationsPagesCorrectionEn {
+  _TranslationsPagesCorrectionEs._(TranslationsEs root) : this._root = root, super.internal(root);
 
   final TranslationsEs _root; // ignore: unused_field
 
@@ -170,53 +165,4 @@ class _TranslationsPagesCorrectionEs implements TranslationsPagesCorrectionEn {
   String get your_answer => 'Su repuesta';
   @override
   String get question => 'Pregunta';
-}
-
-/// Flat map(s) containing all translations.
-/// Only for edge cases! For simple maps, use the map function of this library.
-extension on TranslationsEs {
-  dynamic _flatMapFunction(String path) {
-    switch (path) {
-      case 'misc.ok':
-        return 'De acuerdo';
-      case 'misc.cancel':
-        return 'Anular';
-      case 'misc.submit':
-        return 'Enviar';
-      case 'widgets.game_parameters.position_generation_minimum_moves':
-        return 'Movimientos mínimos (para generación de posición):';
-      case 'widgets.game_parameters.moves_to_play':
-        return 'Movimientos por jugar:';
-      case 'pages.home.title':
-        return 'Página de inicio';
-      case 'pages.home.game_parameters':
-        return 'Parámetros del juego';
-      case 'pages.home.new_game':
-        return 'Nuevo juego';
-      case 'pages.home.generation_error':
-        return 'No se pudo generar una posición y su secuencia de movimientos.';
-      case 'pages.question.title':
-        return 'Página de pregunta';
-      case 'pages.question.ready':
-        return 'Soy listo';
-      case 'pages.answer.title':
-        return 'Página de respuesta';
-      case 'pages.answer.illegal_position':
-        return 'Posición ilegal';
-      case 'pages.answer.your_answer':
-        return 'Su respuesta';
-      case 'pages.answer.question':
-        return 'Pregunta';
-      case 'pages.correction.title':
-        return 'Página de correción';
-      case 'pages.correction.correction':
-        return 'Corrección';
-      case 'pages.correction.your_answer':
-        return 'Su repuesta';
-      case 'pages.correction.question':
-        return 'Pregunta';
-      default:
-        return null;
-    }
-  }
 }

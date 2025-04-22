@@ -6,8 +6,8 @@
   },
   "widgets": {
     "game_parameters": {
-      "position_generation_minimum_moves": "Movimientos mínimos (para generación de posición):",
-      "moves_to_play": "Movimientos por jugar:"
+      "position_generation_minimum_moves": "Movimientos mínimos desde inicio:",
+      "moves_to_play": "Cuento de movimientos:"
     }
   },
   "pages": {
