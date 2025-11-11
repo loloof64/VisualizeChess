@@ -22,8 +22,10 @@ class QuestionPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final maxWidth = MediaQuery.of(context).size.width;
-    final boardWidth = maxWidth < 500 ? maxWidth : 500;
+    final shortestSide = MediaQuery.sizeOf(context).shortestSide;
+    final isPortrait =
+        MediaQuery.orientationOf(context) == Orientation.portrait;
+    final boardWidth = isPortrait ? shortestSide : shortestSide * 0.5;
     final game = ref.watch(gameInstanceProvider);
     final firstMoveNumber = game.firstMoveNumber;
     final firstMoveIsWhiteTurn = game.firstMoveIsWhiteTurn;
