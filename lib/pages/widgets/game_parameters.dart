@@ -48,20 +48,27 @@ class GameParametersWidgetState extends State<GameParametersWidget> {
   @override
   Widget build(BuildContext context) {
     return Column(
-      spacing: 10,
+      spacing: 4,
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
           children: [
-            Text(t.widgets.game_parameters.position_generation_minimum_moves),
-            Text("$_minGenerationMovesCount"),
+            Text(
+              t.widgets.game_parameters.position_generation_minimum_moves,
+              style: Theme.of(context).textTheme.labelSmall,
+            ),
+            Text(
+              "$_minGenerationMovesCount",
+              style: Theme.of(context).textTheme.labelSmall,
+            ),
           ],
         ),
         Slider(
           value: _minGenerationMovesCount.toDouble(),
           min: 1,
           max: 160,
+          padding: EdgeInsets.all(0),
           onChanged: (newValue) {
             setState(() {
               _minGenerationMovesCount = newValue.toInt();
@@ -71,14 +78,21 @@ class GameParametersWidgetState extends State<GameParametersWidget> {
         ),
         Row(
           children: [
-            Text(t.widgets.game_parameters.moves_to_play),
-            Text("$_movesToPlayCount"),
+            Text(
+              t.widgets.game_parameters.moves_to_play,
+              style: Theme.of(context).textTheme.labelSmall,
+            ),
+            Text(
+              "$_movesToPlayCount",
+              style: Theme.of(context).textTheme.labelSmall,
+            ),
           ],
         ),
         Slider(
           value: _movesToPlayCount.toDouble(),
           min: 1,
           max: 10,
+          padding: EdgeInsets.all(0),
           onChanged: (newValue) {
             setState(() {
               _movesToPlayCount = newValue.toInt();
